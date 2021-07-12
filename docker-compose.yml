@@ -1,17 +1,29 @@
 version: "3.9"
 services:
-    db:
-        image: postgres
-        volumes:
-            - ./tmp/db:/var/lib/postgresql/data
-        environment: 
-            POSTGRES_PASSWORD: locadex
-    web:
-        build: .
-        command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-        volumes:
-            - .:/dockerails
-        ports:
-            - "3000:3000"
-        depends_on: 
-            - db
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: locadex
+    networks:
+      rails-subnet:
+        ipv4_address: 172.28.0.2
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/dockerails
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks:
+      - rails-subnet
+
+networks:
+  rails-subnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.28.0.0/16"
