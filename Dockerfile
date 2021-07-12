@@ -5,6 +5,8 @@ COPY Gemfile /dockerails/Gemfile
 COPY Gemfile.lock /dockerails/Gemfile.lock
 RUN bundle install
 
+COPY Makefile /dockerails/Makefile
+
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt install -y nodejs
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
