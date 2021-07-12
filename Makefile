@@ -17,6 +17,9 @@ RUN_ARGS := $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 new-project:
 	docker-compose run --no-deps web rails new . --force --database=postgresql
 
+new-api-project:
+	docker-compose run --no-deps web rails new . --api --force --database=postgresql
+
 build:
 	docker-compose build
 
