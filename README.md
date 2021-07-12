@@ -4,8 +4,8 @@
 #### To Do
 - [x] Postgres
 - [x] Rails new
-- [ ] Procfile
-- [ ] Makefile
+- [ ] Procfile with foreman
+- [x] Makefile
 - [ ] Redis
 - [ ] Sidekick
 
