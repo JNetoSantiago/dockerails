@@ -1,5 +1,7 @@
 FROM ruby:3.0.2
 
+ENV project=dockerails
+
 RUN apt update -qq && apt -y install \
     autoconf \
     bison \
@@ -23,10 +25,10 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
 
 RUN apt-get clean && rm -rf /var/lib/apt/list/*
 
-WORKDIR /dockerails
+WORKDIR /${project}
 
 COPY Gemfile Gemfile.lock ./
-COPY Makefile /dockerails/Makefile
+COPY Makefile /${project}/Makefile
 
 RUN bundle install
 
